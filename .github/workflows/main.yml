@@ -45,15 +45,15 @@ jobs:
         docker tag $IMAGE_NAME $IMAGE_ID:$LATEST_TAG
         docker push $IMAGE_ID:$LATEST_TAG
 
-    # - name: 🚀 Update server
-    #   uses: cross-the-world/ssh-scp-ssh-pipelines@latest
-    #   with:
-    #     host: ${{ secrets.PROD_SERVER }}
-    #     user: ${{ secrets.PROD_USERNAME }}
-    #     pass: ${{ secrets.PROD_PASSWORD }}
-    #     port: ${{ secrets.PROD_PORT }}
-    #     connect_timeout: 120s
-    #     first_ssh: |
-    #       cd ${{ secrets.PROD_DIR }}
-    #       sed -i "s/IMAGE_VERSION=.*/IMAGE_VERSION=${{ env.NEW_TAG }}/g" run.sh
-    #       bash run.sh
+    - name: 🚀 Update server
+      uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+      with:
+        host: ${{ secrets.PROD_SERVER }}
+        user: ${{ secrets.PROD_USERNAME }}
+        pass: ${{ secrets.PROD_PASSWORD }}
+        port: ${{ secrets.PROD_PORT }}
+        connect_timeout: 120s
+        first_ssh: |
+          cd ${{ secrets.PROD_DIR }}
+          sed -i "s/IMAGE_VERSION=.*/IMAGE_VERSION=${{ env.NEW_TAG }}/g" run.sh
+          bash run.sh
