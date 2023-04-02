@@ -9,10 +9,7 @@ import requests
 app = FastAPI()
 
 # Konfigurasi pengaturan CORS
-origins = [
-    "http://localhost",
-    "http://localhost:8080"
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
